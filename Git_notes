@@ -84,6 +84,20 @@ Changes to be committed:
 
 == Now I added a file to the git and see the diff in the git status output. there is file to be committed that has been added to git.
 
+==Now lets commit this file
+
+root@ip-172-31-42-215:/opt/DevOps/Git# git commit -m "git notes 30-Oct-2018" 
+[master (root-commit) 5b7b6dd] git notes 30-Oct-2018
+ 1 file changed, 89 insertions(+)
+ create mode 100644 Git_notes
+
+
+==now this file has been committed to git with a message -m and after this if see the git status we will see there is nothing to get committ.
+
+
+==> Now lets add our file to a remote repository.
+
+
 
 
 
