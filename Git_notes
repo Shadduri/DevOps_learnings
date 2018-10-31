@@ -112,4 +112,120 @@ To https://github.com/Shadduri/DevOps_learnings.git
    44329a1..f39932a  master -> master
 Branch master set up to track remote branch master from origin.
 
+===============================================================================================================================
+
+GIT Branching and Merging
+================================================================
+
+=> To creat a git branch
+
+root@ip-172-31-42-215:/opt/Demo# git branch testbranch
+
+I have created a branch with name testbrach. Now branch is created but still I am in master brnch only So to work on my new branch I need to check out to that branch first.
+
+=> To check out to new branch
+
+root@ip-172-31-42-215:/opt/Demo# git checkout testbranch
+Switched to branch 'testbranch'
+
+Now I switched to new testbranch
+
+=>Now lets add one new file and check the status 
+
+root@ip-172-31-42-215:/opt/Demo# git status
+On branch testbranch
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        text1.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+root@ip-172-31-42-215:/opt/Demo# git add *.txt
+root@ip-172-31-42-215:/opt/Demo# git commit -m "adding a test file to new branch called testbranch" text1.txt
+[testbranch e8d86b7] adding a test file to new branch called testbranch
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 text1.txt
+
+
+Now if I check on the git repository still I am unablr to see the newly created branch because I still not pushed the files to the remote repository So lets push the file to remote repository.
+
+root@ip-172-31-42-215:/opt/Demo# git push -u origin testbranch
+Username for 'https://github.com': Shadduri
+Password for 'https://Shadduri@github.com':
+Counting objects: 2, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 300 bytes | 0 bytes/s, done.
+Total 2 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create a pull request for 'testbranch' on GitHub by visiting:
+remote:      https://github.com/Shadduri/demo1/pull/new/testbranch
+remote:
+To https://github.com/Shadduri/demo1.git
+ * [new branch]      testbranch -> testbranch
+Branch testbranch set up to track remote branch testbranch from origin.
+
+Now if we check the remote repository we can see the two branches.
+
+But my new file only visible in the new branch because still I did not merged my changes with master branch
+
+root@ip-172-31-42-215:/opt/Demo# ll
+total 16
+drwxr-xr-x 3 root root 4096 Oct 31 02:43 ./
+drwxr-xr-x 4 root root 4096 Oct 30 13:27 ../
+-rw-r--r-- 1 root root   71 Oct 31 02:43 first.txt
+drwxr-xr-x 8 root root 4096 Oct 31 03:02 .git/
+-rw-r--r-- 1 root root    0 Oct 31 02:43 second.jsp
+-rw-r--r-- 1 root root    0 Oct 31 02:31 text1.txt
+root@ip-172-31-42-215:/opt/Demo# git checkout master
+Switched to branch 'master'
+root@ip-172-31-42-215:/opt/Demo# ll
+total 16
+drwxr-xr-x 3 root root 4096 Oct 31 03:10 ./
+drwxr-xr-x 4 root root 4096 Oct 30 13:27 ../
+-rw-r--r-- 1 root root   71 Oct 31 02:43 first.txt
+drwxr-xr-x 8 root root 4096 Oct 31 03:10 .git/
+-rw-r--r-- 1 root root    0 Oct 31 02:43 second.jsp
+root@ip-172-31-42-215:/opt/Demo#
+
+=> Now we have to merge the chenges to master branch for this we must checkout to the master branch
+
+root@ip-172-31-42-215:/opt/Demo# git merge testbranch
+Updating a40be81..e8d86b7
+Fast-forward
+ text1.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 text1.txt
+root@ip-172-31-42-215:/opt/Demo# ll
+total 16
+drwxr-xr-x 3 root root 4096 Oct 31 03:13 ./
+drwxr-xr-x 4 root root 4096 Oct 30 13:27 ../
+-rw-r--r-- 1 root root   71 Oct 31 02:43 first.txt
+drwxr-xr-x 8 root root 4096 Oct 31 03:13 .git/
+-rw-r--r-- 1 root root    0 Oct 31 02:43 second.jsp
+-rw-r--r-- 1 root root    0 Oct 31 03:13 text1.txt
+
+Now we can see the text1 file in master branch as well but we still unable to see this new file in remote repository master branh because we still not pushed the chnages to remote repo's master branch
+
+root@ip-172-31-42-215:/opt/Demo# git push -u origin master
+Username for 'https://github.com': Shadduri
+Password for 'https://Shadduri@github.com':
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/Shadduri/demo1.git
+   a40be81..e8d86b7  master -> master
+Branch master set up to track remote branch master from origin.
+
+
+=> to delete the branch
+
+root@ip-172-31-42-215:/opt/Demo# git branch -d testbranch
+Deleted branch testbranch (was e8d86b7).
+
+Now this deleted the new branch but can visible in my remote repo because we deleted this locally So to delete in remote repo we need apply below command
+
+root@ip-172-31-42-215:/opt/Demo# git push -u origin --delete testbranch
+Username for 'https://github.com': Shadduri
+Password for 'https://Shadduri@github.com':
+To https://github.com/Shadduri/demo1.git
+ - [deleted]         testbranch
+
 
