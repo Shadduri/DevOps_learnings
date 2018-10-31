@@ -96,8 +96,7 @@ root@ip-172-31-42-215:/opt/DevOps/Git# git commit -m "git notes 30-Oct-2018"
 
 
 ==> Now lets add our file to a remote repository.
-
-
+git push -u orign master
 
 
 
